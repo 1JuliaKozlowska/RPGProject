@@ -11,7 +11,16 @@ public interface IGameEntity {
     String getName();
     String getDescription();
     Attack[] getAttacks();
+
     RPGWeapon getEquippedWeapon();
     RPGArmor getEquippedArmor();
     RPGRing getEquippedRing();
+
+    int getBaseDamage();
+    int getBaseHealth();
+    int getBaseDefense();
+
+    int getDamage();
+    int getHealth();
+    int getDefense();
 }
