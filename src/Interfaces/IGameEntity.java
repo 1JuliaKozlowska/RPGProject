@@ -5,6 +5,7 @@ import Items.RPGArmor;
 import Items.RPGRing;
 import Items.RPGWeapon;
 
+import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
 import java.util.ArrayList;
 
 public interface IGameEntity {
@@ -23,4 +24,6 @@ public interface IGameEntity {
     int getDamage();
     int getHealth();
     int getDefense();
+
+    String getASCIIArt(int line);
 }

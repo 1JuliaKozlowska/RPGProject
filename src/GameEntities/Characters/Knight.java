@@ -19,7 +19,7 @@ public class Knight extends Character
 
 
     @Override
-    public String printASCIIArt(int line){
+    public String getASCIIArt(int line){
         return switch (line) {
             case 0 -> "  <> |";
             case 1 -> " /||_|";

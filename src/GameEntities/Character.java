@@ -18,7 +18,8 @@ public abstract class Character implements IGameEntity {
     protected int baseHealth;
     protected int baseDefense;
 
-    protected abstract String printASCIIArt(int line);
+    @Override
+    public abstract String getASCIIArt(int line);
 
     public Character() {
         this.name = null;
