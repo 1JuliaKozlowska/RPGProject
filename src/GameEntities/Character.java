@@ -9,9 +9,15 @@ public abstract class Character implements IGameEntity {
     protected String name;
     protected String description;
     protected Attack[] attacks = new Attack[4];
+
     protected RPGWeapon equippedWeapon;
     protected RPGArmor equippedArmor;
     protected RPGRing equippedRing;
+
+    protected int baseDamage;
+    protected int baseHealth;
+    protected int baseDefense;
+
     protected abstract String printASCIIArt(int line);
 
     public Character() {
@@ -39,4 +45,31 @@ public abstract class Character implements IGameEntity {
 
     @Override
     public RPGRing getEquippedRing() { return equippedRing; }
+
+
+    @Override
+    public int getBaseDamage() { return baseDamage; }
+
+    @Override
+    public int getBaseHealth() { return baseHealth; }
+
+    @Override
+    public int getBaseDefense() { return baseDefense; }
+
+
+    //TODO: Zmienić wartości aby były wyliczane z założonych przedmiotów i ich buffów
+    @Override
+    public int getDamage() {
+        return baseDamage;
+    }
+
+    @Override
+    public int getHealth() {
+        return baseHealth;
+    }
+
+    @Override
+    public int getDefense() {
+        return baseDefense;
+    }
 }

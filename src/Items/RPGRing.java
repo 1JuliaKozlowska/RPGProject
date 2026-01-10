@@ -2,17 +2,26 @@ package Items;
 
 import java.util.UUID;
 
-public abstract class RPGRing {
-    private RingProperties ringProperties;
+public abstract class RPGRing extends Item {
+    protected final int meleeDamageBonus;
+    protected final int meleeDefenseBonus;
 
-    protected RPGRing(){
-        RingProperties.RingBuilder builder = RingProperties.builder(defaultID());
-        setDefaults(builder);
-        this.ringProperties = builder.build();
+    protected RPGRing(RingBuilder b) {
+        super(b);
+        this.meleeDamageBonus = b.meleeDamageBonus;
+        this.meleeDefenseBonus = b.meleeDefenseBonus;
     }
-    protected String defaultID() { return this.getClass().getSimpleName().toLowerCase(); }
-    protected abstract void setDefaults(RingProperties.RingBuilder builder);
-    public RingProperties getRingProperties(){
-        return ringProperties;
+
+    public static abstract class RingBuilder extends Item.ItemBuilder<RingBuilder> {
+        private int meleeDamageBonus = 0;
+        private int meleeDefenseBonus = 0;
+
+        protected RingBuilder(String id) { super(id); }
+
+        @Override
+        protected RingBuilder self() { return this; }
+
+        public RingBuilder meleeDamageBonus(int v) { this.meleeDamageBonus = v; return this; }
+        public RingBuilder meleeDefenseBonus(int v) { this.meleeDefenseBonus = v; return this; }
     }
 }

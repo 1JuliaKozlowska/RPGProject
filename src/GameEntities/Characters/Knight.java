@@ -10,7 +10,13 @@ public class Knight extends Character
     public Knight() {
         this.name = "Knight";
         this.description = "Noble knight.";
+
+        this.baseDamage = 40;
+        this.baseHealth = 100;
+        this.baseDefense = 20;
     }
+
+
 
     @Override
     public String printASCIIArt(int line){
