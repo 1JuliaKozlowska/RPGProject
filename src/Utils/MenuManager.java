@@ -35,7 +35,6 @@ public class MenuManager {
 
             if (currentState.IsFinished()) {
                 states.pop();
-                TerminalUtils.ClearTerminal();
             }
         }
         else

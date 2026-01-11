@@ -15,6 +15,7 @@ public class MainMenu implements IGameState {
 
     @Override
     public void Display(){
+        TerminalUtils.ClearTerminal();
         GameEntities.Character[] characters = manager.game.getPlayer().getSelectedCharacters();
         int difficulty = manager.game.getDifficulty();
         System.out.println("RPG Game main menu");
@@ -41,10 +42,10 @@ public class MainMenu implements IGameState {
     public void HandleInput(String input){
         switch (input) {
             case "1" -> System.out.println("Fighting!");
-            case "2" -> System.out.println("Showing characters!");
+            case "2" -> manager.Push(new CharactersMenu(manager));
             case "3" -> System.out.println("Showing inventory!");
             case "4" -> System.out.println("Shop");
-            case "5" -> manager.Push(new ChangeDifficultyMenu(manager));
+            case "5" -> manager.Push(new NumberInput(manager, "Enter difficulty value (1-10):", "Provided value is not a number. Please enter a number.", manager.game::setDifficulty));
             case "6" -> finished = true;
             default -> System.out.println("Invalid choice. Please enter valid number.");
         }

@@ -1,6 +1,9 @@
 package Utils;
 
+import GameEntities.Character;
 import Interfaces.IGameEntity;
+
+import java.util.Map;
 
 public class TerminalUtils {
 
@@ -86,6 +89,62 @@ public class TerminalUtils {
 
         return result;
     }
+
+    public static String EntitiesInRowWithIdAndNamesString(Map<Integer, Character> entities){
+        int spacing = 5;
+        int margin = (TerminalUtils.termonalWidth - (entities.size() * 10) - (spacing * (entities.size() - 1))) / 2;
+        String result = "";
+        for (int i = 0; i < 4; i++)
+        {
+            if (i != 1 ){
+                result += String.valueOf(' ').repeat(margin + 4);
+            } else {
+                result += String.valueOf(' ').repeat(margin);
+            }
+            for (Map.Entry<Integer, Character> gameEntity : entities.entrySet())
+            {
+                if (i != 1 ){
+                    result += gameEntity.getValue().getASCIIArt(i);
+                    result += String.valueOf(' ').repeat(spacing + 4);
+                } else {
+                    result += gameEntity.getKey() + " ";
+                    result += gameEntity.getValue().getASCIIArt(i);
+                    result += String.valueOf(' ').repeat(spacing);
+                }
+            }
+            result += '\n';
+        }
+        result += String.valueOf(' ').repeat(margin + 4);
+        for (Map.Entry<Integer, Character> gameEntity : entities.entrySet())
+        {
+            result += gameEntity.getValue().getName();
+            result += String.valueOf(' ').repeat(spacing + 4);
+
+        }
+        return result;
+    }
+
+    public static String CharacterWithStatsString(Character character){
+        String weapon = (character.getEquippedWeapon() != null) ? character.getEquippedWeapon().getName() : "NONE";
+        String armor = (character.getEquippedArmor() != null) ? character.getEquippedArmor().getName() : "NONE";
+        String ring = (character.getEquippedRing() != null) ? character.getEquippedRing().getName() : "NONE";
+        int spacing = 5;
+        String result = "";
+        for (int i = 0; i < 4; i++) {
+            result += character.getASCIIArt(i);
+            result += String.valueOf(' ').repeat(spacing);
+            switch (i){
+                case 0 -> result += "Base HP: " + character.getBaseHealth();
+                case 1 -> result += "Base Damage: " + character.getBaseDamage();
+                case 2 -> result += "Base Defense: " + character.getBaseDefense();
+                case 3 -> result += "Equipment: Weapon - " + weapon + ", Armor - " + armor + ", Ring - " + ring;
+            }
+            if (i != 3){
+                result += '\n';
+            }
+        }
+        return result;
+    };
 
     public static String StringOptions(String[] options){
         String result = "";
