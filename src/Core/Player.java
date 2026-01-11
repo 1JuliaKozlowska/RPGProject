@@ -43,6 +43,10 @@ public class Player {
         return selectedCharacters;
     }
 
+    public List<Character> getAvailableCharacters(){
+        return availableCharacters;
+    }
+
     public Character GetCharacterByName(String name){
         return availableCharacters.stream().filter(c -> name.equals(c.getName())).findFirst().orElse(null);
     }
