@@ -3,51 +3,52 @@ package GameEntities.Characters;
 import Core.Attack;
 import GameEntities.Character;
 
-public class Knight extends Character
-{
+public class Mage extends Character {
+
     private final Attack normalAttack;
     private final Attack specialAttack;
-    public Knight(){
-        normalAttack = new Attack("Sword Slash", "Simple attack.", this);
-        specialAttack = new Attack("Charge!", "Powerfull attack that also damages", this);
-        specialAttack.damageMultiplier = 1.5;
-    }
 
+    public Mage() {
+        normalAttack = new Attack("Simple Spell", "Most basic offensive spell.", this);
+        specialAttack = new Attack("Mana Burst", "Powerful magical explosion that deals damage to all enemies.", this);
+        specialAttack.damageMultiplier = 0.5;
+        specialAttack.spread = true;
+    }
 
     @Override
     public String getASCIIArt(int line){
         return switch (line) {
-            case 0 -> "  <> |";
-            case 1 -> " /||_|";
-            case 2 -> "/_||  ";
-            case 3 -> "  /\\  ";
-            default -> "  <> |\n /||_|\n/_||  \n  /\\  ";
+            case 0 -> "  ^  *";
+            case 1 -> "/[]\\ I";
+            case 2 -> " []  I";
+            case 3 -> " /\\  I";
+            default -> "  ^  *\n/[]\\ I\n []  I\n /\\  I";
         };
     }
 
     @Override
     public String getName() {
-        return "Knight";
+        return "Mage";
     }
 
     @Override
     public String getDescription() {
-        return "Noble knight.";
+        return "Mysterious caster.";
     }
 
     @Override
     public int getBaseAttackPoints() {
-        return 30;
+        return 40;
     }
 
     @Override
     public int getBaseHealth() {
-        return 100;
+        return 60;
     }
 
     @Override
     public int getBaseDefense() {
-        return 10;
+        return 2;
     }
 
     @Override
@@ -59,6 +60,4 @@ public class Knight extends Character
     public Attack specialAttack() {
         return specialAttack;
     }
-
-
 }

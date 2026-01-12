@@ -42,6 +42,11 @@ public class TerminalUtils {
         System.out.flush();
     }
 
+    public static void ClearTerminalWithMessage(String message){
+        ClearTerminal();
+        System.out.println(message);
+    }
+
     public static String EntitiesInRowString(IGameEntity[] entities){
         int spacing = 5;
         int margin = (TerminalUtils.termonalWidth - (entities.length * 6) - (spacing * (entities.length - 1))) / 2;
@@ -125,24 +130,20 @@ public class TerminalUtils {
     }
 
     public static String CharacterWithStatsString(Character character){
-        String weapon = (character.getEquippedWeapon() != null) ? character.getEquippedWeapon().getName() : "NONE";
-        String armor = (character.getEquippedArmor() != null) ? character.getEquippedArmor().getName() : "NONE";
-        String ring = (character.getEquippedRing() != null) ? character.getEquippedRing().getName() : "NONE";
         int spacing = 5;
         String result = "";
         for (int i = 0; i < 4; i++) {
             result += character.getASCIIArt(i);
             result += String.valueOf(' ').repeat(spacing);
             switch (i){
-                case 0 -> result += "Base HP: " + character.getBaseHealth();
-                case 1 -> result += "Base Damage: " + character.getBaseDamage();
-                case 2 -> result += "Base Defense: " + character.getBaseDefense();
-                case 3 -> result += "Equipment: Weapon - " + weapon + ", Armor - " + armor + ", Ring - " + ring;
+                case 0 -> result += "HP: " + character.getHealth();
+                case 1 -> result += "Damage: " + character.getAttackPoints();
+                case 2 -> result += "Defense: " + character.getDefense();
+                case 3 -> result += "Level: " + character.getTotalLevel();
             }
-            if (i != 3){
-                result += '\n';
-            }
+            result += '\n';
         }
+        result += "Level up cost - " + ColoredText("yellow", String.valueOf(character.getUpgradeCost())) + " money";
         return result;
     };
 

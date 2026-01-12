@@ -2,6 +2,7 @@ package Utils.UI;
 
 import Interfaces.IGameState;
 import Utils.MenuManager;
+import Utils.TerminalUtils;
 
 import java.util.function.IntConsumer;
 
@@ -30,6 +31,7 @@ public class NumberInput implements IGameState {
             int value = Integer.parseInt(input);
             setter.accept(value);
             finished = true;
+            TerminalUtils.ClearTerminal();
         } catch (Exception e){
             System.out.println(invalidOptionMessage);
         }

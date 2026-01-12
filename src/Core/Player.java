@@ -1,59 +1,42 @@
 package Core;
 
-import java.util.ArrayList;
 import java.util.List;
 import GameEntities.Character;
-import GameEntities.Characters.Knight;
+import GameEntities.Characters.*;
 
 public class Player {
     private int money;
-
-    private final List<Character> availableCharacters = new ArrayList<>();
-    private final Character[] selectedCharacters = new Character[3];
-    private final Inventory inventory = new Inventory();
+    private final Character[] teamCharacters = new Character[3];
 
     public void CreateNew(){
         this.money = 500;
-        unlockCharacter(new Knight());
-        SelectCharacter(0, GetCharacterByName("Knight"));
+        teamCharacters[0] = new Knight();
+        teamCharacters[1] = new Archer();
+        teamCharacters[2] = new Mage();
     }
 
-    public void unlockCharacter(Character character){
-        if (!hasCharacter(character.getName()))
-        {
-            availableCharacters.add(character);
-        }
-    }
 
-    public boolean hasCharacter(String characterName) {
-        return availableCharacters.stream().anyMatch(c -> characterName.equals(c.getName()));
-    }
 
-    public void SelectCharacter(int position, Character character){
-        if (hasCharacter(character.getName())){
-            selectedCharacters[position] = character;
-        }
-        else
-        {
-            //TODO: exception
-        }
-    }
-
-    public Character[] getSelectedCharacters() {
-        return selectedCharacters;
-    }
-
-    public List<Character> getAvailableCharacters(){
-        return availableCharacters;
+    public Character[] getTeamCharacters() {
+        return teamCharacters;
     }
 
     public Character GetCharacterByName(String name){
-        return availableCharacters.stream().filter(c -> name.equals(c.getName())).findFirst().orElse(null);
+        for (Character c : teamCharacters){
+            if (c != null && c.getName().equals(name)){
+                return c;
+            }
+        }
+        return null;
     }
 
     public int GetMoney()
     {
         return money;
+    }
+
+    public void pay(int amount){
+        money -= amount;
     }
 
 

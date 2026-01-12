@@ -1,6 +1,6 @@
 package Utils.UI;
 
-import Interfaces.IGameEntity;
+import GameEntities.Character;
 import Interfaces.IGameState;
 import Utils.MenuManager;
 import Utils.TerminalUtils;
@@ -15,8 +15,7 @@ public class MainMenu implements IGameState {
 
     @Override
     public void Display(){
-        TerminalUtils.ClearTerminal();
-        GameEntities.Character[] characters = manager.game.getPlayer().getSelectedCharacters();
+        Character[] characters = manager.game.getPlayer().getTeamCharacters();
         int difficulty = manager.game.getDifficulty();
         System.out.println("RPG Game main menu");
         if (difficulty < 5) {
@@ -34,20 +33,23 @@ public class MainMenu implements IGameState {
         System.out.println("Your team:");
         System.out.println(TerminalUtils.EntitiesInRowString(characters));
         System.out.println(TerminalUtils.EntitiesNamesInRowString(characters));
-        System.out.println(TerminalUtils.StringOptions(new String[] {"1. Fight!", "2. Show characters", "3. Show inventory", "4. Shop", "5. Change difficulty", "6. Exit game"}));
+        System.out.println(TerminalUtils.StringOptions(new String[] {"1. Fight!", "2. Characters", "3. Change difficulty", "4. Exit game"}));
 
     }
 
     @Override
     public void HandleInput(String input){
         switch (input) {
-            case "1" -> System.out.println("Fighting!");
-            case "2" -> manager.Push(new CharactersMenu(manager));
-            case "3" -> System.out.println("Showing inventory!");
-            case "4" -> System.out.println("Shop");
-            case "5" -> manager.Push(new NumberInput(manager, "Enter difficulty value (1-10):", "Provided value is not a number. Please enter a number.", manager.game::setDifficulty));
-            case "6" -> finished = true;
-            default -> System.out.println("Invalid choice. Please enter valid number.");
+            case "1" -> {
+                System.out.println("Fighting!");
+            }
+            case "2" -> {
+                TerminalUtils.ClearTerminal();
+                manager.Push(new CharactersMenu(manager));
+            }
+            case "3" -> manager.Push(new NumberInput(manager, "Enter difficulty value (1-10):", "Provided value is not a number. Please enter a number.", manager.game::setDifficulty));
+            case "4" -> finished = true;
+            default -> TerminalUtils.ClearTerminalWithMessage(TerminalUtils.ColoredText("red", "Invalid choice. Please enter valid number."));
         }
     }
 
