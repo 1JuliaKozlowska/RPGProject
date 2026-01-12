@@ -1,76 +1,117 @@
 package GameEntities;
 
+import Core.Attack;
+import Core.Damage;
 import Interfaces.IGameEntity;
-import Items.RPGArmor;
-import Items.RPGRing;
-import Items.RPGWeapon;
 
 public abstract class Character implements IGameEntity {
-    protected String name;
+
+    /*protected String name;
     protected String description;
-    protected Attack[] attacks = new Attack[4];
 
-    protected RPGWeapon equippedWeapon;
-    protected RPGArmor equippedArmor;
-    protected RPGRing equippedRing;
-
-    protected int baseDamage;
+    protected int baseAttackPoints;
     protected int baseHealth;
-    protected int baseDefense;
+    protected int baseDefense;*/
+
+    @Override
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    protected int currentHealth;
+    protected boolean alive;
+
+    protected int attackPointsLevel;
+    protected int healthLevel;
+    protected int defenseLevel;
 
     @Override
     public abstract String getASCIIArt(int line);
 
     public Character() {
-        this.name = null;
-        this.description = null;
-        this.equippedWeapon = null;
-        this.equippedArmor = null;
-        this.equippedRing = null;
+        this.attackPointsLevel = 0;
+        this.healthLevel = 0;
+        this.defenseLevel = 0;
+        alive = true;
+        fullHeal();
     }
 
     @Override
-    public String getName() { return name; }
+    public abstract String getName();
 
     @Override
-    public String getDescription() { return description; }
+    public abstract String getDescription();
+
+    public void attack(IGameEntity target, Damage damage)
+    {
+        target.takeAttack(damage.getDamageValue());
+    }
 
     @Override
-    public Attack[] getAttacks() { return attacks; }
+    public void takeAttack(int damageValue)
+    {
+        int finalDamage = damageValue * (damageValue / (damageValue + getDefense()));
+        if (finalDamage >= getCurrentHealth()){
+            currentHealth = 0;
+
+        }
+    }
 
     @Override
-    public RPGWeapon getEquippedWeapon() { return equippedWeapon; }
+    public boolean isAlive(){
+        return alive;
+    }
 
     @Override
-    public RPGArmor getEquippedArmor() { return equippedArmor; }
+    public abstract int getBaseAttackPoints();
 
     @Override
-    public RPGRing getEquippedRing() { return equippedRing; }
-
-
-    @Override
-    public int getBaseDamage() { return baseDamage; }
+    public abstract int getBaseHealth();
 
     @Override
-    public int getBaseHealth() { return baseHealth; }
+    public abstract int getBaseDefense();
 
     @Override
-    public int getBaseDefense() { return baseDefense; }
-
-
-    //TODO: Zmienić wartości aby były wyliczane z założonych przedmiotów i ich buffów
-    @Override
-    public int getDamage() {
-        return baseDamage;
+    public int getAttackPoints() {
+        return getBaseAttackPoints() + attackPointsLevel * 5;
     }
 
     @Override
     public int getHealth() {
-        return baseHealth;
+        return getBaseHealth() + healthLevel * 10;
     }
 
     @Override
     public int getDefense() {
-        return baseDefense;
+        return getBaseDefense() + defenseLevel * 2;
     }
+
+    public void LevelUpDamage(){
+        attackPointsLevel++;
+    }
+    public void LevelUpHealth(){
+        healthLevel++;
+    }
+    public void LevelUpDefense(){
+        defenseLevel++;
+    }
+
+    public void fullHeal(){
+        setCurrentHealth(getHealth());
+    }
+
+    public int getTotalLevel(){
+        return defenseLevel + healthLevel + attackPointsLevel;
+    }
+
+    public int getUpgradeCost(){
+        return 50 + 5 * getTotalLevel();
+    }
+
+    public abstract Attack normalAttack();
+    public abstract Attack specialAttack();
 }

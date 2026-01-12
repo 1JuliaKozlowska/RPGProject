@@ -19,7 +19,7 @@ public class CharactersMenu implements IGameState {
         availableCharactersWithId = new HashMap<>();
 
         int id = 100;
-        for (GameEntities.Character character : manager.game.getPlayer().getAvailableCharacters())
+        for (GameEntities.Character character : manager.game.getPlayer().getTeamCharacters())
         {
             id++;
             availableCharactersWithId.put(id, character);
@@ -28,7 +28,6 @@ public class CharactersMenu implements IGameState {
 
     @Override
     public void Display(){
-        TerminalUtils.ClearTerminal();
         System.out.println("Characters menu");
         System.out.println("Available characters:");
         System.out.println(TerminalUtils.EntitiesInRowWithIdAndNamesString(availableCharactersWithId));
@@ -38,15 +37,21 @@ public class CharactersMenu implements IGameState {
     @Override
     public void HandleInput(String input){
         if (Objects.equals(input, "1")){
+            TerminalUtils.ClearTerminal();
             finished = true;
         } else {
             try {
                 int value = Integer.parseInt(input);
                 if (availableCharactersWithId.containsKey(value)){
+                    TerminalUtils.ClearTerminal();
                     manager.Push(new CharacterOptionsMenu(manager, availableCharactersWithId.get(value)));
                 }
+                else
+                {
+                    TerminalUtils.ClearTerminalWithMessage(TerminalUtils.ColoredText("red", "No character with id " + value + "."));
+                }
             } catch (Exception e){
-                System.out.println("Provided value is not a number. Please enter a number.");
+                TerminalUtils.ClearTerminalWithMessage(TerminalUtils.ColoredText("red", "Provided value is not a number. Please enter a number."));
             }
         }
     }

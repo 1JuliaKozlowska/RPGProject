@@ -1,29 +1,24 @@
 package Interfaces;
 
-import GameEntities.Attack;
-import Items.RPGArmor;
-import Items.RPGRing;
-import Items.RPGWeapon;
 
-import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
-import java.util.ArrayList;
+import Core.Damage;
 
 public interface IGameEntity {
     String getName();
     String getDescription();
-    Attack[] getAttacks();
 
-    RPGWeapon getEquippedWeapon();
-    RPGArmor getEquippedArmor();
-    RPGRing getEquippedRing();
-
-    int getBaseDamage();
+    int getBaseAttackPoints();
     int getBaseHealth();
     int getBaseDefense();
 
-    int getDamage();
+    int getAttackPoints();
     int getHealth();
+    int getCurrentHealth();
     int getDefense();
 
     String getASCIIArt(int line);
+
+    void takeAttack(int damageValue);
+
+    boolean isAlive();
 }

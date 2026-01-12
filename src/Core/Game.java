@@ -1,6 +1,5 @@
 package Core;
 
-import Enums.UIModes;
 import Utils.MenuManager;
 import Utils.UI.MainMenu;
 
@@ -12,7 +11,6 @@ public class Game {
     private Player player;
     private int difficulty;
     private Scanner scanner;
-    private UIModes currentUI;
     private MenuManager menuManager;
 
     public Game(){

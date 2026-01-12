@@ -1,31 +1,33 @@
 package Core;
 
 public class Damage {
-    private int meleeValue;
-    private int rangedValue;
-    private int magicValue;
-    private int summonValue;
-
-    public Damage(int meleeValue, int rangedValue, int magicValue, int summonValue){
-        this.meleeValue = meleeValue;
-        this.rangedValue = rangedValue;
-        this.magicValue = magicValue;
-        this.summonValue = summonValue;
+    public int getDamageValue() {
+        return damageValue;
     }
 
-    public int getMeleeValue() {
-        return meleeValue;
+    public boolean isSpread() {
+        return spread;
     }
 
-    public int getRangedValue() {
-        return rangedValue;
+    public int getChanceToHit() {
+        return chanceToHit;
     }
 
-    public int getMagicValue() {
-        return magicValue;
+    public String getAttackerName() {
+        return attackerName;
     }
 
-    public int getSummonValue() {
-        return summonValue;
+    private int damageValue;
+    private boolean spread;
+    private int chanceToHit;
+    private String attackerName;
+
+    public Damage(int damageValue, boolean spread, int chanceToHit, String attackerName){
+        this.damageValue = damageValue;
+        this.spread = spread;
+        this.chanceToHit = chanceToHit;
+        this.attackerName = attackerName;
     }
+
+
 }
