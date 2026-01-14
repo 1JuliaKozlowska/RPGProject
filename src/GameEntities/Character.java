@@ -6,11 +6,7 @@ import Interfaces.IGameEntity;
 
 public abstract class Character implements IGameEntity {
 
-
-    @Override
-    public int getCurrentHealth() {
-        return currentHealth;
-    }
+    
 
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
