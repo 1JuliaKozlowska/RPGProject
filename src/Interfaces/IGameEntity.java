@@ -18,7 +18,8 @@ public interface IGameEntity {
 
     String getASCIIArt(int line);
 
-    void takeAttack(int damageValue);
+    int takeAttack(int damageValue);
+    int takeAttackNoDefense(int damageValue);
 
     boolean isAlive();
 }

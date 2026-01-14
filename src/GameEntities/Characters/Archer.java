@@ -22,7 +22,7 @@ public class Archer extends Character {
             case 1 -> "[]--I>";
             case 2 -> "[] /  ";
             case 3 -> "/\\    ";
-            default -> "o  \\  \n[]--I>\n[] /  \n/\\    ";
+            default -> getASCIIArt(0) + "\n" + getASCIIArt(1) + "\n" + getASCIIArt(2) + "\n" + getASCIIArt(3);
         };
     }
 

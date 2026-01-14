@@ -24,7 +24,7 @@ public class CharacterOptionsMenu implements IGameState {
         System.out.println(character.getName());
         System.out.println(character.getDescription());
         System.out.println(TerminalUtils.CharacterWithStatsString(character));
-        System.out.println(TerminalUtils.StringOptions(new String[] {"1. Level up HP", "2. Level up Damage", "3. Level up Defense", "4. Go back"}));
+        System.out.println(TerminalUtils.StringOptions(new String[] {"1. Level up HP", "2. Level up Damage", "3. Level up Defense", "4. Full heal",  "5. Go back"}));
     }
 
     @Override
@@ -61,12 +61,23 @@ public class CharacterOptionsMenu implements IGameState {
                 break;
             }
             case "4": {
+                if (player.GetMoney() >= 20){
+                    manager.game.getPlayer().pay(20);
+                    character.fullHeal();
+                    TerminalUtils.ClearTerminal();
+                }else{
+                    TerminalUtils.ClearTerminalWithMessage(TerminalUtils.ColoredText("red", "Not enough money to upgrade."));
+                }
+                break;
+            }
+            case "5": {
                 finished = true;
                 TerminalUtils.ClearTerminal();
                 break;
             }
             default: {
                 TerminalUtils.ClearTerminalWithMessage(TerminalUtils.ColoredText("red", "Invalid choice. Please enter valid number."));
+                break;
             }
         }
     }
