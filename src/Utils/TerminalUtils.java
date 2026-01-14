@@ -1,5 +1,6 @@
 package Utils;
 
+import Core.Attack;
 import GameEntities.Character;
 import Interfaces.IGameEntity;
 
@@ -29,7 +30,7 @@ public class TerminalUtils {
             case "lightwhite" -> "\u001B[97m";
             case "orange" -> "\u001B[38;5;208m";
             case "clear" -> "\u001B[0m";
-            default -> "\u001B[0m";
+            default -> "";
         };
     }
 
@@ -136,14 +137,15 @@ public class TerminalUtils {
             result += character.getASCIIArt(i);
             result += String.valueOf(' ').repeat(spacing);
             switch (i){
-                case 0 -> result += "HP: " + character.getHealth();
+                case 0 -> result += "HP: " + character.getCurrentHealth() + "/" + character.getHealth();
                 case 1 -> result += "Damage: " + character.getAttackPoints();
                 case 2 -> result += "Defense: " + character.getDefense();
                 case 3 -> result += "Level: " + character.getTotalLevel();
             }
             result += '\n';
         }
-        result += "Level up cost - " + ColoredText("yellow", String.valueOf(character.getUpgradeCost())) + " money";
+        result += "Level up cost - " + ColoredText("yellow", String.valueOf(character.getUpgradeCost())) + " money\n";
+        result += "Full heal cost - " + ColoredText("yellow", String.valueOf(20)) + " money";
         return result;
     };
 
@@ -168,12 +170,53 @@ public class TerminalUtils {
         return result;
     }
 
+    public static String FightScreenString(IGameEntity[] characters, IGameEntity[] enemies, int selectedCharacter, int targettedEnemy){
+        int margin = 1;
+        String result = "";
+        result += "Now attacks - " + ColoredText("yellow", characters[selectedCharacter].getName()) + '\n';
+        for (int i = 0; i < 3; i++) {
+            result += padRight(String.valueOf(' ').repeat(margin) + padRight(characters[i].getName(), 8) + " " + characters[i].getCurrentHealth() + "/" + characters[i].getHealth() + " HP", termonalWidth - 18);
+            result += padRight(enemies[i].getName(), 8) + " " + enemies[i].getCurrentHealth() + "/" + enemies[i].getHealth() + " HP" + '\n';
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (i == selectedCharacter){
+                    result += padRight((j == 1 ? (String.valueOf(' ').repeat(margin) + padRight(characters[i].getName(), 9)) : String.valueOf(' ').repeat(margin + 9)) + ' ' + ColoredText("yellow", characters[i].getASCIIArt(j)), termonalWidth - 7);
+                }else if (!characters[i].isAlive()){
+                    result += padRight((j == 1 ? (String.valueOf(' ').repeat(margin) + padRight(characters[i].getName(), 9)) : String.valueOf(' ').repeat(margin + 9)) + ' ' + ColoredText("red", characters[i].getASCIIArt(j)), termonalWidth - 7);
+                }else {
+                    result += padRight((j == 1 ? (String.valueOf(' ').repeat(margin) + padRight(characters[i].getName(), 9)) : String.valueOf(' ').repeat(margin + 9)) + ' ' + characters[i].getASCIIArt(j), termonalWidth - 16);
+                }
+                result += ColoredText(i == targettedEnemy ? "orange" : !enemies[i].isAlive() ? "red" : "default", enemies[i].getASCIIArt(j)) + (j == 1 ? (' ' + enemies[i].getName()) : "");
+                result += '\n';
+            }
+        }
+        return result;
+    }
+
     private static String emptyCharacterASCIIArt(int line){
         return switch (line) {
             case 0, 3 -> "------";
             case 1, 2 -> "|    |";
             default -> "------\n|    |\n|    |\n------";
         };
+    }
+
+    public static String padRight(String text, int length) {
+        if (text.length() >= length) {
+            return text;
+        }
+
+        return text + " ".repeat(length - text.length());
+    }
+
+    public static String attackString(Attack attack){
+        String result = "";
+        result += "=".repeat(80) + '\n';
+        result += "| " + padRight(attack.getName() + " - " + attack.damage().getDamageValue(), 77) + "|\n";
+        result += "| " + padRight(attack.getDescription(), 77) + "|\n";
+        result += "=".repeat(80);
+        return result;
     }
 }
 

@@ -9,8 +9,9 @@ public class Knight extends Character
     private final Attack specialAttack;
     public Knight(){
         normalAttack = new Attack("Sword Slash", "Simple attack.", this);
-        specialAttack = new Attack("Charge!", "Powerfull attack that also damages", this);
+        specialAttack = new Attack("Charge!", "Powerful attack that also damages attacker.", this);
         specialAttack.damageMultiplier = 1.5;
+        specialAttack.selfDamageValue = 0.2;
     }
 
 
@@ -21,7 +22,7 @@ public class Knight extends Character
             case 1 -> " /||_|";
             case 2 -> "/_||  ";
             case 3 -> "  /\\  ";
-            default -> "  <> |\n /||_|\n/_||  \n  /\\  ";
+            default -> getASCIIArt(0) + "\n" + getASCIIArt(1) + "\n" + getASCIIArt(2) + "\n" + getASCIIArt(3);
         };
     }
 

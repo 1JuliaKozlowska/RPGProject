@@ -17,16 +17,23 @@ public class Damage {
         return attackerName;
     }
 
+    public double getSelfDamageValue() {
+        return selfDamageValue;
+    }
+
     private int damageValue;
     private boolean spread;
     private int chanceToHit;
     private String attackerName;
+    private double selfDamageValue;
 
-    public Damage(int damageValue, boolean spread, int chanceToHit, String attackerName){
+
+    public Damage(int damageValue, boolean spread, int chanceToHit, String attackerName, double selfDamageValue){
         this.damageValue = damageValue;
         this.spread = spread;
         this.chanceToHit = chanceToHit;
         this.attackerName = attackerName;
+        this.selfDamageValue = selfDamageValue;
     }
 
 

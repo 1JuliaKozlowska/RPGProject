@@ -41,7 +41,8 @@ public class MainMenu implements IGameState {
     public void HandleInput(String input){
         switch (input) {
             case "1" -> {
-                System.out.println("Fighting!");
+                TerminalUtils.ClearTerminal();
+                manager.Push(new FightScene(manager));
             }
             case "2" -> {
                 TerminalUtils.ClearTerminal();

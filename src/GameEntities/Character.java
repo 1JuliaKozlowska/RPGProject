@@ -6,12 +6,6 @@ import Interfaces.IGameEntity;
 
 public abstract class Character implements IGameEntity {
 
-    /*protected String name;
-    protected String description;
-
-    protected int baseAttackPoints;
-    protected int baseHealth;
-    protected int baseDefense;*/
 
     @Override
     public int getCurrentHealth() {
@@ -23,20 +17,20 @@ public abstract class Character implements IGameEntity {
     }
 
     protected int currentHealth;
-    protected boolean alive;
 
     protected int attackPointsLevel;
     protected int healthLevel;
     protected int defenseLevel;
 
     @Override
-    public abstract String getASCIIArt(int line);
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
 
     public Character() {
         this.attackPointsLevel = 0;
         this.healthLevel = 0;
         this.defenseLevel = 0;
-        alive = true;
         fullHeal();
     }
 
@@ -52,18 +46,35 @@ public abstract class Character implements IGameEntity {
     }
 
     @Override
-    public void takeAttack(int damageValue)
+    public int takeAttack(int damageValue)
     {
-        int finalDamage = damageValue * (damageValue / (damageValue + getDefense()));
+        double reduction = (double) damageValue / (damageValue + getDefense());
+        int finalDamage = (int) Math.round(damageValue * reduction);
         if (finalDamage >= getCurrentHealth()){
             currentHealth = 0;
-
         }
+        else
+        {
+            currentHealth -= finalDamage;
+        }
+        return finalDamage;
+    }
+
+    @Override
+    public int takeAttackNoDefense(int damageValue) {
+        if (damageValue >= getCurrentHealth()){
+            currentHealth = 0;
+        }
+        else
+        {
+            currentHealth -= damageValue;
+        }
+        return damageValue;
     }
 
     @Override
     public boolean isAlive(){
-        return alive;
+        return currentHealth > 0;
     }
 
     @Override
@@ -111,6 +122,7 @@ public abstract class Character implements IGameEntity {
     public int getUpgradeCost(){
         return 50 + 5 * getTotalLevel();
     }
+
 
     public abstract Attack normalAttack();
     public abstract Attack specialAttack();

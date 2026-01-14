@@ -10,8 +10,9 @@ public class Mage extends Character {
 
     public Mage() {
         normalAttack = new Attack("Simple Spell", "Most basic offensive spell.", this);
-        specialAttack = new Attack("Mana Burst", "Powerful magical explosion that deals damage to all enemies.", this);
+        specialAttack = new Attack("Mana Burst", "Powerful magical explosion that deals damage to all enemies. Has 20% chance to miss.", this);
         specialAttack.damageMultiplier = 0.5;
+        specialAttack.chanceToHit = 80;
         specialAttack.spread = true;
     }
 
@@ -22,7 +23,7 @@ public class Mage extends Character {
             case 1 -> "/[]\\ I";
             case 2 -> " []  I";
             case 3 -> " /\\  I";
-            default -> "  ^  *\n/[]\\ I\n []  I\n /\\  I";
+            default -> getASCIIArt(0) + "\n" + getASCIIArt(1) + "\n" + getASCIIArt(2) + "\n" + getASCIIArt(3);
         };
     }
 
