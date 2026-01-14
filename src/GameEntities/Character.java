@@ -23,7 +23,9 @@ public abstract class Character implements IGameEntity {
     protected int defenseLevel;
 
     @Override
-    public abstract String getASCIIArt(int line);
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
 
     public Character() {
         this.attackPointsLevel = 0;
