@@ -39,5 +39,9 @@ public class Player {
         money -= amount;
     }
 
+    public void reward(int amount){
+        money += amount;
+    }
+
 
 }
