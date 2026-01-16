@@ -39,6 +39,7 @@ public class TerminalUtils {
     }
 
     public static void ClearTerminal(){
+        System.out.println(String.valueOf('=').repeat(TerminalUtils.termonalWidth));
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
@@ -212,10 +213,10 @@ public class TerminalUtils {
 
     public static String attackString(Attack attack){
         String result = "";
-        result += "=".repeat(80) + '\n';
-        result += "| " + padRight(attack.getName() + " - " + attack.damage().getDamageValue(), 77) + "|\n";
-        result += "| " + padRight(attack.getDescription(), 77) + "|\n";
-        result += "=".repeat(80);
+        result += "=".repeat(90) + '\n';
+        result += "| " + padRight(attack.getName() + " - " + attack.damage().getDamageValue(), 87) + "|\n";
+        result += "| " + padRight(attack.getDescription(), 87) + "|\n";
+        result += "=".repeat(90);
         return result;
     }
 }

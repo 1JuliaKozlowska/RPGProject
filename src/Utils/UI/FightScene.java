@@ -28,12 +28,12 @@ public class FightScene implements IGameState {
         difficulty = menuManager.game.getDifficulty();
         enemies = setupEnemies(difficulty);
         targetedEnemy = -1;
-        attacker = 0;
+        characters = manager.game.getPlayer().getTeamCharacters();
+        attacker = Arrays.asList(characters).indexOf(getFirstAlive(characters));
     }
 
     @Override
     public void Display(){
-        characters = manager.game.getPlayer().getTeamCharacters();
         System.out.println(TerminalUtils.ColoredText("yellow", "Fighting on difficulty level " + difficulty));
         System.out.println(TerminalUtils.FightScreenString(characters, enemies, attacker, targetedEnemy));
 
