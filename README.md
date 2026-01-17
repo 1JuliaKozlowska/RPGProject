@@ -11,6 +11,8 @@ Gra jest klasycznym RPG-iem turowym, w którym zarządzasz drużyną bohaterów,
 
 1. Pierwsze Uruchomienie i Konfiguracja
 
+Aby uruchomić grę wymagana jest Java w wersji 21 (dokładna wersja JRE 10.0.9).
+
 Po uruchomieniu programu, gra przeprowadzi test Twojego terminala. Jest to kluczowe dla poprawnego wyświetlania grafiki ASCII i kolorów.
 
 - Czcionka: Upewnij się, że używasz czcionki typu Monospace (stałej szerokości).
@@ -52,8 +54,7 @@ Przebieg tury:
 5. Przeciwnicy i Trudność
    W grze spotkasz różnorodne potwory, m.in.:
 
-- Szkielety i Zombie (standardowi wrogowie),
-- Ghost, Orki i Trolle (silniejsi przeciwnicy),
-- Pająki i Slime'y.
+- Slime'y, Pająki, i Szkielety (standardowi wrogowie),
+- Ghost, Orki, Harpie i Trolle (silniejsi przeciwnicy),
 
 Poziom trudności (Difficulty): Im wyższy poziom ustawisz w menu głównym, tym więcej punktów życia i większe obrażenia będą mieli wrogowie. Wyższa trudność to większe wyzwanie, ale też większa satysfakcja z wygranej.
