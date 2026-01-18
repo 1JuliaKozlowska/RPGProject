@@ -1,13 +1,14 @@
 package Core;
 
-import java.util.List;
 import GameEntities.Character;
 import GameEntities.Characters.*;
 
 public class Player {
+    //pola z posiadanymi przez gracza pieniędzmi i drużyną postaci
     private int money;
     private final Character[] teamCharacters = new Character[3];
 
+    //tworzenie nowego gracza. na start gracz dostaje 500 pieniędzy i 3 postacie do drużyny
     public void CreateNew(){
         this.money = 500;
         teamCharacters[0] = new Knight();
@@ -15,30 +16,23 @@ public class Player {
         teamCharacters[2] = new Mage();
     }
 
-
-
+    //zwraca postacie w drużynie gracza
     public Character[] getTeamCharacters() {
         return teamCharacters;
     }
 
-    public Character GetCharacterByName(String name){
-        for (Character c : teamCharacters){
-            if (c != null && c.getName().equals(name)){
-                return c;
-            }
-        }
-        return null;
-    }
-
+    //zwraca pieniądze gracza
     public int GetMoney()
     {
         return money;
     }
 
+    //zabiera pieniądze graczowi
     public void pay(int amount){
         money -= amount;
     }
 
+    //przyznaje pieniądze graczowi
     public void reward(int amount){
         money += amount;
     }

@@ -23,6 +23,7 @@ public class FightScene implements IGameState {
     int attacker;
     Random rand = new Random();
 
+    //tu znajduje się całe UI oraz mechanizm walki
     public FightScene(MenuManager menuManager){
         this.manager = menuManager;
         difficulty = menuManager.game.getDifficulty();

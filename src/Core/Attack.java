@@ -2,6 +2,7 @@ package Core;
 
 import GameEntities.Character;
 
+//klasa na ataki postaci. każda postać ma atak normalny oraz specjalny
 public class Attack {
     private Character character;
 

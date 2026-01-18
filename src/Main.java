@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         boolean requirementsSatisfied = false;
         Game game;
         //wywołanie funkcji która pyta użytkownika, czy wszystko poprawnie się renderuje w terminalu. funkcja poprosi o wpisanie "yes"
