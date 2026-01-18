@@ -4,6 +4,7 @@ import Interfaces.IGameEntity;
 
 public abstract class Enemy implements IGameEntity {
 
+    //klasa na której bazują przeciwnicy
     protected int currentHealth;
     protected int difficultyLevel;
 

@@ -1,5 +1,6 @@
 package Core;
 
+//klasa na damage
 public class Damage {
     public int getDamageValue() {
         return damageValue;

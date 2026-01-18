@@ -13,6 +13,7 @@ public class NumberInput implements IGameState {
     private final String invalidOptionMessage;
     private final IntConsumer setter;
 
+    //element UI potrzebny do wprowadzenia cyfry
     public NumberInput(MenuManager menuManager, String message, String invalidOptionMessage, IntConsumer setter){
         this.manager = menuManager;
         this.message = message;

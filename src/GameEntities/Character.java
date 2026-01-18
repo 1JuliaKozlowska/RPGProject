@@ -6,8 +6,7 @@ import Interfaces.IGameEntity;
 
 public abstract class Character implements IGameEntity {
 
-    
-
+    //klasa na której bazują postacie
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
     }

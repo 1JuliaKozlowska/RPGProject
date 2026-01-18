@@ -18,6 +18,7 @@ public class CharacterOptionsMenu implements IGameState {
         player = manager.game.getPlayer();
     }
 
+    //opcje konkretnej postaci
     @Override
     public void Display(){
         System.out.println("Money: " + TerminalUtils.ColoredText("lightyellow", String.valueOf(player.GetMoney())));

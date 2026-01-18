@@ -8,6 +8,7 @@ public class ChangeDifficultyMenu implements IGameState {
     private final MenuManager manager;
     private boolean finished = false;
 
+    //menu które zmienia poziom trudności
     public ChangeDifficultyMenu(MenuManager menuManager){
         this.manager = menuManager;
     }

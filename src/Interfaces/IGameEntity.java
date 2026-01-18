@@ -1,8 +1,6 @@
 package Interfaces;
 
-
-import Core.Damage;
-
+//interfejs który implementują wszystkie postacie i przeciwnicy
 public interface IGameEntity {
     String getName();
     String getDescription();

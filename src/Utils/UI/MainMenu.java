@@ -9,6 +9,7 @@ public class MainMenu implements IGameState {
     private final MenuManager manager;
     private boolean finished = false;
 
+    //menu główne
     public MainMenu(MenuManager menuManager){
         this.manager = menuManager;
     }

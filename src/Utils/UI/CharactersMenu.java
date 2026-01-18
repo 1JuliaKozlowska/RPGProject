@@ -26,6 +26,7 @@ public class CharactersMenu implements IGameState {
         }
     }
 
+    //menu postaci
     @Override
     public void Display(){
         System.out.println("Characters menu");
